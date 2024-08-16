@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for flat in flats %}
+        <h1><a href='#'>{{ flat.title }}</a></h1>
+        <p>{{ flat.description }}</p>
+        <h3>{{ flat.price }}</h3>
+        <h4>{{ flat.rating }}</h4>
+    {% endfor %}
+{% endblock %}

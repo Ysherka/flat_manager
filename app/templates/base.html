@@ -213,10 +213,11 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2">Rent out</a></li>
-          <li><a href="#" class="nav-link px-2">My bookings</a></li>
+          <li><a href="{% url "flats:all_flats" %}" class="nav-link px-2">Снять</a></li>
+          <li><a href="#" class="nav-link px-2">Сдать</a></li>
+          <li><a href="#" class="nav-link px-2">Мои бронирования</a></li>
           <li><a href="#" class="nav-link px-2">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2">About</a></li>
+          <li><a href="#" class="nav-link px-2">О нас</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
@@ -225,7 +226,7 @@
         </div>
       </header>
     </div>
-
+    {% block content %}{% endblock %}
 
   </main>
   <script src="{% static "assets/dist/js/bootstrap.bundle.min.js" %}"></script>
