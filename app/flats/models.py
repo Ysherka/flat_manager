@@ -1,6 +1,5 @@
 from django.db import models
 
-from .utils import get_flat_images_path
 
 class Flat(models.Model):
     title = models.CharField(max_length=150, verbose_name='Заголовок')
@@ -11,13 +10,30 @@ class Flat(models.Model):
     # 'booked_dates' in the app 'bookings'
     rating = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Рейтинг квартиры')
 
+    def __str__(self):
+        return f'{self.title}'
 
-class Image(models.Model):
+    def get_main_img(self):
+        main_img = FlatImage.objects.filter(flat=self.pk).first().image
+        return main_img
+
+
+def get_flat_images_path(flat_obj, filename: str):
+    if FlatImage.objects.last():
+        last_img_id = FlatImage.objects.last().id
+    else:
+        last_img_id = 0
+    new_filename = str(last_img_id + 1) + '.' + filename.split('.')[-1]
+    return f'flats_images/{flat_obj.flat_id}/{new_filename}'
+
+class FlatImage(models.Model):
     flat = models.ForeignKey(to=Flat, on_delete=models.CASCADE, verbose_name='Квартира')
     image = models.ImageField(upload_to=get_flat_images_path, verbose_name='Изображение квартиры')
 
 
-class Review(models.Model):
+
+
+class FlatReview(models.Model):
     # author = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Автор отзыва')
     flat = models.ForeignKey(to=Flat, on_delete=models.CASCADE, verbose_name='Квартира с отзывом')
     text = models.TextField(max_length=500, verbose_name='Текст отзыва')
