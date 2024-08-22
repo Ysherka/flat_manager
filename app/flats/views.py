@@ -6,7 +6,7 @@ class AllFlatsView(ListView):
     model = Flat
     template_name = 'flats/flats.html'
     context_object_name = 'flats'
-    paginate_by = 6
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
