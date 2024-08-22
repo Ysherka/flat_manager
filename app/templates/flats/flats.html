@@ -7,7 +7,9 @@
 <div class="content">
     {% for flat in flats %}
     <div class="content_item">
+        {% if flat.get_main_img.url %}
         <a href='#'><img src="{{ flat.get_main_img.url }}" alt="{{ flat.title }}"></a>
+        {% endif %}
         <h1><a href='#'>{{ flat.title }}</a></h1>
         <p class="description">{{ flat.description }}</p>
         <h3>{{ flat.price }}р.</h3>

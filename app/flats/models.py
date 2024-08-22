@@ -14,8 +14,11 @@ class Flat(models.Model):
         return f'{self.title}'
 
     def get_main_img(self):
-        main_img = FlatImage.objects.filter(flat=self.pk).first().image
-        return main_img
+        if FlatImage.objects.filter(flat=self.pk).first():
+            main_img = FlatImage.objects.filter(flat=self.pk).first().image
+            return main_img
+        else:
+            return None
 
 
 def get_flat_images_path(flat_obj, filename: str):
