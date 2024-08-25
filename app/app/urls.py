@@ -23,7 +23,7 @@ from .settings import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('flats', include('flats.urls', namespace='flats')),
+    path('flats/', include('flats.urls', namespace='flats')),
 ]
 
 if DEBUG:

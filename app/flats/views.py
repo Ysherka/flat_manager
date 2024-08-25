@@ -13,12 +13,13 @@ class AllFlatsView(ListView):
         return context
 
 
-# class FlatView(DetailView):
-#     model = Flat
-#     template_name = 'flats/detail_flat.html'
-#     context_object_name = 'flat'
-#
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
+class FlatView(DetailView):
+    model = Flat
+    template_name = 'flats/detail_flat.html'
+    pk_url_kwarg = 'flat_id'
+    context_object_name = 'flat'
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

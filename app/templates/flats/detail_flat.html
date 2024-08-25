@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="content">
+    <div class="content_item">
+        {% if flat.get_main_img.url %}
+        <img src="{{ flat.get_main_img.url }}" alt="{{ flat.title }}">
+        {% endif %}
+        <h1>{{ flat.title }}</h1>
+        <p class="description">{{ flat.description }}</p>
+        <h3>{{ flat.price }}р.</h3>
+        <h4>{{ flat.rating }}</h4>
+    </div>
+</div>
+
+{% endblock %}
