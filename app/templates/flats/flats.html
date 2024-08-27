@@ -1,22 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 
-
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/flats.css" %}">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=b686386b-ae9e-47cb-96f7-890f0e65f584&lang=ru_RU" type="text/javascript"></script>
+    <script src="{% static "js/map.js" %}"></script>
+{% endblock %}
 
 {% block content %}
-<div class="content">
-    {% for flat in flats %}
-    <div class="content_item">
-        {% if flat.get_main_img.url %}
-        <a href='{% url "flats:flat" flat.id %}'><img src="{{ flat.get_main_img.url }}" alt="{{ flat.title }}"></a>
-        {% endif %}
-        <h1><a href='{% url "flats:flat" flat.id %}'>{{ flat.title }}</a></h1>
-        <p class="description">{{ flat.description }}</p>
-        <h3>{{ flat.price }}р.</h3>
-        <h4>{{ flat.rating }}</h4>
+
+    <div class="content">
+        <div class="flat">
+            {% for flat in flats %}
+            <div class="flat_item">
+                {% if flat.get_main_img.url %}
+                <a href='{% url "flats:flat" flat.id %}'><img src="{{ flat.get_main_img.url }}" alt="{{ flat.title }}"></a>
+                {% endif %}
+                <h1><a href='{% url "flats:flat" flat.id %}'>{{ flat.title }}</a></h1>
+                <p class="description">{{ flat.description }}</p>
+                <h3>{{ flat.price }}р.</h3>
+                <h4>{{ flat.rating }}</h4>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="map-wrapper"><div id="map"></div></div>
     </div>
-    {% endfor %}
-</div>
+
+
 
 
 

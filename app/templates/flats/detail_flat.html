@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="content">
+<div class="content flat">
     <div class="content_item">
         {% if flat.get_main_img.url %}
         <img src="{{ flat.get_main_img.url }}" alt="{{ flat.title }}">
@@ -11,6 +11,22 @@
         <p class="description">{{ flat.description }}</p>
         <h3>{{ flat.price }}р.</h3>
         <h4>{{ flat.rating }}</h4>
+    </div>
+</div>
+
+
+<div class="content reviews">
+    <div class="content_item">
+        {% if flat.get_reviews %}
+        {% for review in flat.get_reviews %}
+            <h1>Автор</h1>
+            <p class="description">{{ review.text }}</p>
+            <h4>{{ review.rating }}</h4>
+        {% endfor %}
+        {% else %}
+            <h1>Отзывов пока нет. Будьте первым!</h1>
+        {% endif %}
+
     </div>
 </div>
 

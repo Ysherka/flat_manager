@@ -1,0 +1,32 @@
+.content{
+    display: flex;
+}
+
+.flat {
+    width: 50vw;
+    margin-right: auto;
+}
+
+.flat_item {
+    display: block;
+    width: auto;
+    height: auto;
+    text-align: left;
+    padding: 20px;
+    justify-items: center;
+    align-items: center;
+    
+}
+
+.map-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#map {
+    position: fixed;
+    width: 700px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: 20px;
+}

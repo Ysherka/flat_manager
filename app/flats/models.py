@@ -6,17 +6,26 @@ class Flat(models.Model):
     description = models.TextField(verbose_name='Описание')
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     price = models.IntegerField(default=0, verbose_name='Цена')
+    longitude = models.FloatField(default=0, verbose_name='Долгота')
+    latitude = models.FloatField(default=0, verbose_name='Широта')
     # owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Владелец')
     # 'booked_dates' in the app 'bookings'
     rating = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Рейтинг квартиры')
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.title} <{self.pk}>'
 
     def get_main_img(self):
         if FlatImage.objects.filter(flat=self.pk).first():
             main_img = FlatImage.objects.filter(flat=self.pk).first().image
             return main_img
+        else:
+            return None
+
+    def get_reviews(self):
+        reviews = FlatReview.objects.filter(flat=self.pk)
+        if reviews:
+            return reviews
         else:
             return None
 
