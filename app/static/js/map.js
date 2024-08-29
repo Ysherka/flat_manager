@@ -1,28 +1,47 @@
+function set_url(url) {
+    return function(e){
+        window.location.href = url;
+    }
+}
+
+function loadJson(selector) {
+  return JSON.parse(document.querySelector(selector).getAttribute('data-json'));
+}
+
+var jsonData = loadJson('#jsonData');
+
+
 ymaps.ready(init);
         function init(){
             var myMap = new ymaps.Map("map", {
-                center: [54.073682, 44.937971],
-                zoom: 17
+                center: [jsonData[0]['long'], jsonData[0]['lat']],
+                zoom: 13
             });
 
-            myGeoObject = new ymaps.GeoObject({
-            // Описание геометрии.
-            geometry: {
-                type: "Point",
-                coordinates: [54.073682, 44.937971]
-            },
-            // Свойства.
-            properties: {
-                // Контент метки.
-                iconContent: '5000',
-                hintContent: 'Цена'
-            }
-        }, {
-            // Опции.
-            // Иконка метки будет растягиваться под размер ее содержимого.
-            preset: 'islands#greenStretchyIcon',
-        });
 
-            // Размещение геообъекта на карте.
-            myMap.geoObjects.add(myGeoObject);
+            for (point of jsonData){
+                // Размещение геообъекта на карте.
+                var geoObj = new ymaps.GeoObject({
+                // Описание геометрии.
+                        geometry: {
+                            type: "Point",
+                            coordinates: [point['long'], point['lat']]
+                        },
+                        // Свойства.
+                        properties: {
+                            // Контент метки.
+                            iconContent: point['price'],
+                            hintContent: point['url'],
+                            url: point['url'],
+                        }
+                    }, {
+                        // Опции.
+                        // Иконка метки будет растягиваться под размер ее содержимого.
+                        preset: 'islands#greenStretchyIcon',
+                    });
+                    var url = geoObj.properties._data['url']
+                    geoObj.events.add('click', set_url(url))
+                    myMap.geoObjects.add(geoObj)
+            }
+
         }

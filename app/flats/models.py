@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Flat(models.Model):
@@ -28,6 +29,9 @@ class Flat(models.Model):
             return reviews
         else:
             return None
+
+    def get_url(self):
+        return reverse('flats:flat', kwargs={'flat_id': self.pk})
 
 
 def get_flat_images_path(flat_obj, filename: str):

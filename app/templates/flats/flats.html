@@ -4,10 +4,11 @@
 {% block head %}
     <link rel="stylesheet" href="{% static "css/flats.css" %}">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=b686386b-ae9e-47cb-96f7-890f0e65f584&lang=ru_RU" type="text/javascript"></script>
-    <script src="{% static "js/map.js" %}"></script>
 {% endblock %}
 
 {% block content %}
+<div style="display: none" id="jsonData" data-json='{{ coords }}'></div>
+    <script src="{% static "js/map.js" %}"></script>
 
     <div class="content">
         <div class="flat">
